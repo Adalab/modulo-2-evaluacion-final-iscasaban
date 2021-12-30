@@ -18,9 +18,26 @@ function getAnime(event) {
     .then((data) => {
       for (let index = 0; index < data.results.length; index++) {
         const anime = data.results[index];
-        animeList.innerHTML += `<li><img src="${anime.image_url}" alt="${anime.title}" title="${anime.title}">  ${anime.title}</li>`;
+        const image = renderImg(anime.image_url, anime.title);
+
+        animeList.innerHTML += `<li> ${image} ${anime.title}</li>`;
       }
     });
+}
+
+//Para poder poner una imagen por defecto si no tiene, creo una función que me devuelva la imagen y que podré sustituir en el innerHTML y aplicarle lógica sin complicar el código del for
+
+function renderImg(imageUrl, altImage) {
+  if (
+    imageUrl ===
+      "https://cdn.myanimelist.net/images/qm_50.gif?s=e1ff92a46db617cb83bfc1e205aff620" ||
+    imageUrl === "" ||
+    imageUrl === null
+  ) {
+    imageUrl =
+      "https://via.placeholder.com/225x317.png?text=No+image+available";
+  }
+  return `<img src="${imageUrl}" alt="${altImage}" title="${altImage}" />`;
 }
 
 function clearSearch(event) {
