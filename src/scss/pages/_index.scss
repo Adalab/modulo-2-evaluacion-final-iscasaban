@@ -1,1 +1,34 @@
-
+:root {
+  background-color: $color-bg;
+}
+.page__title {
+  font-family: $font-main;
+  font-size: 1.5rem;
+  color: $color-primary;
+  margin: 25px;
+}
+.search__form {
+  margin-left: 25px;
+  background-color: transparent;
+  margin-bottom: 35px;
+}
+.form__input {
+  border: solid 1px $color-secondary;
+  margin-right: 10px;
+  width: 250px;
+  font-family: $font-main;
+  color: $color-primary;
+  font-size: 1rem;
+}
+.form__btn {
+  margin-right: 10px;
+  padding: 1px 3px;
+  width: 80px;
+  border: solid 1px $color-secondary;
+  font-size: 1rem;
+}
+.anime__results {
+  font-family: $font-main;
+  font-weight: bold;
+  color: $color-primary;
+}
