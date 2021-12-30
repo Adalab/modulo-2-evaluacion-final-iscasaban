@@ -16,8 +16,7 @@ La aplicación de búsqueda de serie consta de dos partes:
 * Un listado de resultados de búsqueda donde aparece el cartel de la serie y el título.
 
 ### 2. Búsqueda
-* Al hacer clic sobre el botón de Buscar, la aplicación debe conectarse al API abierto de Jikan para la
-búsqueda de series de anime. 
+* Al hacer clic sobre el botón de Buscar, la aplicación debe conectarse al API abierto de Jikan para la búsqueda de series de anime. 
 * Para construir la URL de búsqueda hay que recoger el texto que ha introducido la usuaria en el
 campo de búsqueda.
 * Por cada serie contenido en el resultado de la búsqueda hay que pintar una tarjeta donde mostramos
