@@ -23,7 +23,7 @@ function getAnime(event) {
     });
 }
 
-function cleanSearch(event) {
+function clearSearch(event) {
   event.preventDefault();
   animeList.innerHTML = "";
   animeTitle.value = "";
@@ -37,4 +37,4 @@ function cleanSearch(event) {
 
 // searchBtn.addEventListener("click", handleClickUpdate);
 searchBtn.addEventListener("click", getAnime);
-searchResetBtn.addEventListener("click", cleanSearch);
+searchResetBtn.addEventListener("click", clearSearch);
