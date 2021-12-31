@@ -27,12 +27,33 @@
   border: solid 1px $color-secondary;
   font-size: 1rem;
 }
+.anime__wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.anime__results {
+  width: 60%;
+  flex-wrap: wrap;
+}
+.anime__favourites {
+  width: 40%;
+  //   border: solid 1.5px $color-primary;
+}
 .anime__item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   font-family: $font-main;
   font-weight: bold;
   color: $color-primary;
+  outline: solid 1px red;
 }
-.anime__fav {
+.anime__card {
+  outline: solid 1px red;
+  width: 225px;
+  height: 400px;
+}
+.anime__fav--item {
   background-color: $color-primary;
   color: $color-bg;
   border: solid 1px $color-bg;
