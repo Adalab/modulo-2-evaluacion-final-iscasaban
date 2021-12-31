@@ -5,6 +5,7 @@ const animeTitle = document.querySelector(".js-input");
 const searchBtn = document.querySelector(".js-btn-search");
 const animeList = document.querySelector(".js-result");
 const searchResetBtn = document.querySelector(".js-btn-reset");
+const favouritesIds = [];
 
 // 2. Funciones: se ordenan según gustos, pero se pueden agrupar por las que tengan que ver entre sí
 
@@ -37,7 +38,14 @@ function renderAnime(results) {
 function handleAnimeClick(event) {
   const cardElement = event.currentTarget;
   const animeId = cardElement.dataset.animeid;
-  cardElement.classList.toggle('anime__fav--item');
+  cardElement.classList.toggle("anime__fav--item");
+  const indexOfItem = favouritesIds.indexOf(animeId);
+  if (indexOfItem === -1) {
+    favouritesIds.push(animeId);
+  } else {
+    favouritesIds.splice(indexOfItem, 1);
+  } //así agregamos el id al array con cada clic
+  console.log(favouritesIds);
 }
 
 //Para poder poner una imagen por defecto si no tiene, creo una función que me devuelva la imagen y que podré sustituir en el innerHTML y aplicarle lógica sin complicar el código del for
