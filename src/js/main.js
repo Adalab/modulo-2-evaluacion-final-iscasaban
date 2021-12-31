@@ -25,7 +25,7 @@ function renderAnime(results) {
     const anime = results[index];
     const image = renderImg(anime.image_url, anime.title);
 
-    animeList.innerHTML += `<li class="js-anime-item"> ${image} <h3 class="anime__title">${anime.title}</h3></li>`;
+    animeList.innerHTML += `<li data-animeid=${anime.mal_id} class="js-anime-item"> ${image} <h3>${anime.title}</h3></li>`;
   }
 
   const animeListElement = document.querySelectorAll(".js-anime-item");
@@ -35,8 +35,9 @@ function renderAnime(results) {
 }
 
 function handleAnimeClick(event) {
-  console.log("me has hecho clic");
-  //   const selectedAnimeElement = event.currentTarget.dataset.name;
+  const cardElement = event.currentTarget;
+  const animeId = cardElement.dataset.animeid;
+  cardElement.classList.toggle('anime__fav');
 }
 
 //Para poder poner una imagen por defecto si no tiene, creo una función que me devuelva la imagen y que podré sustituir en el innerHTML y aplicarle lógica sin complicar el código del for

@@ -27,8 +27,13 @@
   border: solid 1px $color-secondary;
   font-size: 1rem;
 }
-.anime__title {
+.anime__item {
   font-family: $font-main;
   font-weight: bold;
   color: $color-primary;
+}
+.anime__fav {
+  background-color: $color-primary;
+  color: $color-bg;
+  border: solid 1px $color-bg;
 }
