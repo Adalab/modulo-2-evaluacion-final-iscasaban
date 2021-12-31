@@ -16,13 +16,27 @@ function getAnime(event) {
   fetch(`https://api.jikan.moe/v3/search/anime?q=${animeSearch}`)
     .then((response) => response.json())
     .then((data) => {
-      for (let index = 0; index < data.results.length; index++) {
-        const anime = data.results[index];
-        const image = renderImg(anime.image_url, anime.title);
-
-        animeList.innerHTML += `<li> ${image} ${anime.title}</li>`;
-      }
+      renderAnime(data.results);
     });
+}
+
+function renderAnime(results) {
+  for (let index = 0; index < results.length; index++) {
+    const anime = results[index];
+    const image = renderImg(anime.image_url, anime.title);
+
+    animeList.innerHTML += `<li class="js-anime-item"> ${image} <h3 class="anime__title">${anime.title}</h3></li>`;
+  }
+
+  const animeListElement = document.querySelectorAll(".js-anime-item");
+  for (const animeElement of animeListElement) {
+    animeElement.addEventListener("click", handleAnimeClick);
+  }
+}
+
+function handleAnimeClick(event) {
+  console.log("me has hecho clic");
+  //   const selectedAnimeElement = event.currentTarget.dataset.name;
 }
 
 //Para poder poner una imagen por defecto si no tiene, creo una función que me devuelva la imagen y que podré sustituir en el innerHTML y aplicarle lógica sin complicar el código del for
