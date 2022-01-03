@@ -62,17 +62,18 @@ function handleAnimeClick(event) {
   } else {
     animeFavourites.splice(findIndexAnime, 1); //si el id ya está en favoritos, no queremos que lo vuelva a agregar. Por eso usamos splice, que toma la posición con indexOf y borra ese elemento
   }
+  setInLocalStorage();
   renderFavourites();
 }
 
 //ahora queremos saber a qué título e img se corresponde cada id que tengo guardado en el array favouritesIds:
 
-function renderFavourites () {
-
+function renderFavourites() {
   favsAnimeList.innerHTML = ""; //limpiar lista
   for (const animeFav of animeFavourites) {
     favsAnimeList.innerHTML += `<li data-animeid='${animeFav.id}' class="js-anime-item anime__card"> <img src='${animeFav.image}'> <h3>${animeFav.title}</h3></li>`;
   }
+  setInLocalStorage();
 }
 
 //Para poder poner una imagen por defecto si no tiene, creo una función que me devuelva la imagen y que podré sustituir en el innerHTML y aplicarle lógica sin complicar el código del for
@@ -95,7 +96,24 @@ function clearSearch(event) {
   animeTitle.value = "";
 }
 
+//Local storage
+
+const getFromLocalStorage = () => {
+  const localStorageFavs = localStorage.getItem("animeFavourites");
+  if (localStorageFavs !== null) {
+    animeFavourites = JSON.parse(localStorageFavs);
+    renderFavourites();
+  }
+};
+
+const setInLocalStorage = () => {
+  const stringifyFavs = JSON.stringify(animeFavourites);
+  localStorage.setItem("animeFavourites", stringifyFavs);
+};
+
 // 3. Código que se ejecuta cuando se carga la página: Listeners, pedir datos al servidor, leer datos de la memoria...
 
+getFromLocalStorage();
+renderFavourites();
 searchBtn.addEventListener("click", getAnime);
 searchResetBtn.addEventListener("click", clearSearch);
