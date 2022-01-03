@@ -5,6 +5,7 @@ const animeTitle = document.querySelector(".js-input");
 const searchBtn = document.querySelector(".js-btn-search");
 const animeList = document.querySelector(".js-result");
 const searchResetBtn = document.querySelector(".js-btn-reset");
+const favsAnimeList = document.querySelector(".js-favs");
 let animeFavourites = [];
 
 // 2. Funciones: se ordenan según gustos, pero se pueden agrupar por las que tengan que ver entre sí
@@ -52,25 +53,26 @@ function handleAnimeClick(event) {
     image: animeImg,
   };
 
-  const findIndexAnime = animeFavourites.findIndex((item) => item.id === animeId);
-    if (findIndexAnime === -1) {//así comprobamos si el id ya está en favoritos. Si devuelve -1, no está.
-      animeFavourites.push(animeFav); //con push, lo añadimos al array de favoritos
-    } 
-    else {
-       animeFavourites.splice(findIndexAnime, 1); //si el id ya está en favoritos, no queremos que lo vuelva a agregar. Por eso usamos splice, que toma la posición con indexOf y borra ese elemento
-     }
-   console.log(animeFavourites);
+  const findIndexAnime = animeFavourites.findIndex(
+    (item) => item.id === animeId
+  );
+  if (findIndexAnime === -1) {
+    //así comprobamos si el id ya está en favoritos. Si devuelve -1, no está.
+    animeFavourites.push(animeFav); //con push, lo añadimos al array de favoritos
+  } else {
+    animeFavourites.splice(findIndexAnime, 1); //si el id ya está en favoritos, no queremos que lo vuelva a agregar. Por eso usamos splice, que toma la posición con indexOf y borra ese elemento
+  }
+  renderFavourites();
 }
 
 //ahora queremos saber a qué título e img se corresponde cada id que tengo guardado en el array favouritesIds:
 
-function renderFavourites() {
-    //limpiar lista
-    for (const animeFav of animeFavourites) {
-        
-    //pintar cada favorito que hay en el array    
-    }
-     
+function renderFavourites () {
+
+  favsAnimeList.innerHTML = ""; //limpiar lista
+  for (const animeFav of animeFavourites) {
+    favsAnimeList.innerHTML += `<li data-animeid='${animeFav.id}' class="js-anime-item anime__card"> <img src='${animeFav.image}'> <h3>${animeFav.title}</h3></li>`;
+  }
 }
 
 //Para poder poner una imagen por defecto si no tiene, creo una función que me devuelva la imagen y que podré sustituir en el innerHTML y aplicarle lógica sin complicar el código del for
