@@ -47,6 +47,14 @@
 }
 .anime__favourites {
   width: 40%;
+  height: auto;
+  text-align: center;
+}
+.fav__item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .anime__item {
   display: flex;

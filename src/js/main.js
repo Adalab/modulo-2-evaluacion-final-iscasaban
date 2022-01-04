@@ -8,9 +8,9 @@ const searchResetBtn = document.querySelector('.js-btn-reset');
 const favsAnimeList = document.querySelector('.js-favs');
 let animeFavourites = [];
 
-// 2. Funciones: se ordenan según gustos, pero se pueden agrupar por las que tengan que ver entre sí
+// 2. Funciones
 
-//función para hacer un fetch que devuelva resultados según la búsqueda de la usuaria:
+//Fetch que devuelve resultados según la búsqueda de la usuaria:
 function getAnime(event) {
   event.preventDefault();
   const animeSearch = animeTitle.value;
@@ -125,9 +125,12 @@ function clearSearch(event) {
   animeTitle.value = '';
 }
 
+
+
 // 3. Código que se ejecuta cuando se carga la página: Listeners, pedir datos al servidor, leer datos de la memoria...
 
 getFromLocalStorage();
 renderFavourites();
 searchBtn.addEventListener('click', getAnime);
 searchResetBtn.addEventListener('click', clearSearch);
+
