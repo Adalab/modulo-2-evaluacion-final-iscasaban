@@ -47,7 +47,6 @@
 }
 .anime__favourites {
   width: 40%;
-  
 }
 .anime__item {
   display: flex;
@@ -60,6 +59,7 @@
   width: 225px;
   height: 250px;
   text-align: center;
+  color: $color-primary;
 }
 .anime__card--image {
   width: 125px;
@@ -68,13 +68,12 @@
   object-fit: cover;
   object-position: center center;
 }
-.anime__card--title{
+.anime__card--title {
   font-family: $font-main;
   font-weight: bold;
   font-size: 0.8rem;
   padding-top: 5px;
   text-align: center;
-  color: $color-primary;
 }
 .anime__fav--item {
   background-color: $color-primary;
