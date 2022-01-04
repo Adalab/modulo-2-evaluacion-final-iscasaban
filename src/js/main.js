@@ -29,7 +29,7 @@ function renderAnime(results) {
     const anime = results[index];
     const image = renderImg(anime.image_url, anime.title);
 
-    animeList.innerHTML += `<li data-animeid='${anime.mal_id}' data-animetitle='${anime.title}' data-animeimage='${anime.image_url}' class="js-anime-item anime__card"> ${image} <h3>${anime.title}</h3></li>`;
+    animeList.innerHTML += `<li data-animeid='${anime.mal_id}' data-animetitle='${anime.title}' data-animeimage='${anime.image_url}' class="js-anime-item anime__card"> <img class="anime__card--image" ${image} <h3 class="anime__card--title">${anime.title}</h3></li>`;
   }
 
   //añadimos un listener para saber en qué anime hace clic para añadir a favoritos
@@ -86,7 +86,7 @@ function handleAnimeClick(event) {
 function renderFavourites() {
   favsAnimeList.innerHTML = ''; //limpiar lista
   for (const animeFav of animeFavourites) {
-    favsAnimeList.innerHTML += `<li data-animeid='${animeFav.id}' class="js-anime-item anime__card"> <img src='${animeFav.image}'> <h3>${animeFav.title}</h3></li>`;
+    favsAnimeList.innerHTML += `<li data-animeid='${animeFav.id}' class="js-anime-item anime__card"> <img src='${animeFav.image}'> <h3 class="anime__item">${animeFav.title}</h3></li>`;
   }
   setInLocalStorage();
 }

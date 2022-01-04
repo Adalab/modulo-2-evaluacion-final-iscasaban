@@ -35,44 +35,50 @@
   width: 60%;
   height: auto;
   flex-wrap: wrap;
-  border: $color-primary solid 2px;
-  border-radius: 5%;
   margin-left: 15px;
   &--title {
     font-family: $font-main;
     font-weight: bold;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     padding-top: 15px;
     color: $color-primary;
   }
 }
 .anime__favourites {
   width: 40%;
-  border: solid 1.5px $color-primary;
+  
 }
 .anime__item {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  font-family: $font-main;
-  font-weight: bold;
-  color: $color-primary;
+  justify-content: center;
 }
 .anime__card {
-  outline: solid 1px red;
+  margin-top: 25px;
   width: 225px;
-  height: 400px;
-//   &--image {
-//     width: 125px;
-//     height: 176px;
-//     object-fit: cover;
-//     object-position: center center;
-//     outline: solid 1px red;
-//   }
+  height: 250px;
+  text-align: center;
+}
+.anime__card--image {
+  width: 125px;
+  height: 176px;
+  align-self: center;
+  object-fit: cover;
+  object-position: center center;
+}
+.anime__card--title{
+  font-family: $font-main;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding-top: 5px;
+  text-align: center;
+  color: $color-primary;
 }
 .anime__fav--item {
   background-color: $color-primary;
   color: $color-bg;
   border: solid 1px $color-bg;
+  font-family: $font-main;
 }
