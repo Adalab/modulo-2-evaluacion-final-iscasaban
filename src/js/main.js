@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
 // 1. Variables Globales: querySelector, datos que se van a usar en todas las funciones, de toda la página
-const animeTitle = document.querySelector(".js-input");
-const searchBtn = document.querySelector(".js-btn-search");
-const animeList = document.querySelector(".js-result");
-const searchResetBtn = document.querySelector(".js-btn-reset");
-const favsAnimeList = document.querySelector(".js-favs");
+const animeTitle = document.querySelector('.js-input');
+const searchBtn = document.querySelector('.js-btn-search');
+const animeList = document.querySelector('.js-result');
+const searchResetBtn = document.querySelector('.js-btn-reset');
+const favsAnimeList = document.querySelector('.js-favs');
 let animeFavourites = [];
 
 // 2. Funciones: se ordenan según gustos, pero se pueden agrupar por las que tengan que ver entre sí
@@ -14,7 +14,7 @@ let animeFavourites = [];
 function getAnime(event) {
   event.preventDefault();
   const animeSearch = animeTitle.value;
-  animeList.innerHTML = "";
+  animeList.innerHTML = '';
 
   fetch(`https://api.jikan.moe/v3/search/anime?q=${animeSearch}`)
     .then((response) => response.json())
@@ -33,16 +33,31 @@ function renderAnime(results) {
   }
 
   //añadimos un listener para saber en qué anime hace clic para añadir a favoritos
-  const animeListElement = document.querySelectorAll(".js-anime-item");
+  const animeListElement = document.querySelectorAll('.js-anime-item');
   for (const animeElement of animeListElement) {
-    animeElement.addEventListener("click", handleAnimeClick);
+    animeElement.addEventListener('click', handleAnimeClick);
   }
 }
+
+//Local storage
+
+const getFromLocalStorage = () => {
+  const localStorageFavs = localStorage.getItem('animeFavourites');
+  if (localStorageFavs !== null) {
+    animeFavourites = JSON.parse(localStorageFavs);
+    renderFavourites();
+  }
+};
+
+const setInLocalStorage = () => {
+  const stringifyFavs = JSON.stringify(animeFavourites);
+  localStorage.setItem('animeFavourites', stringifyFavs);
+};
 
 // con esta función sabemos en qué elemento hace clic y lo añadimos a favoritos (toggle anime__fav--item) o lo eliminamos si ya estaba en el listado
 function handleAnimeClick(event) {
   const clickedAnime = event.currentTarget;
-  clickedAnime.classList.toggle("anime__fav--item");
+  clickedAnime.classList.toggle('anime__fav--item');
 
   const animeId = clickedAnime.dataset.animeid;
   const animeTitle = clickedAnime.dataset.animetitle;
@@ -69,7 +84,7 @@ function handleAnimeClick(event) {
 //ahora queremos saber a qué título e img se corresponde cada id que tengo guardado en el array favouritesIds:
 
 function renderFavourites() {
-  favsAnimeList.innerHTML = ""; //limpiar lista
+  favsAnimeList.innerHTML = ''; //limpiar lista
   for (const animeFav of animeFavourites) {
     favsAnimeList.innerHTML += `<li data-animeid='${animeFav.id}' class="js-anime-item anime__card"> <img src='${animeFav.image}'> <h3>${animeFav.title}</h3></li>`;
   }
@@ -80,40 +95,25 @@ function renderFavourites() {
 function renderImg(imageUrl, altImage) {
   if (
     imageUrl ===
-      "https://cdn.myanimelist.net/images/qm_50.gif?s=e1ff92a46db617cb83bfc1e205aff620" ||
-    imageUrl === "" ||
+      'https://cdn.myanimelist.net/images/qm_50.gif?s=e1ff92a46db617cb83bfc1e205aff620' ||
+    imageUrl === '' ||
     imageUrl === null
   ) {
     imageUrl =
-      "https://via.placeholder.com/225x317.png?text=No+image+available";
+      'https://via.placeholder.com/225x317.png?text=No+image+available';
   }
   return `<img src="${imageUrl}" alt="${altImage}" title="${altImage}" />`;
 }
 
 function clearSearch(event) {
   event.preventDefault();
-  animeList.innerHTML = "";
-  animeTitle.value = "";
+  animeList.innerHTML = '';
+  animeTitle.value = '';
 }
-
-//Local storage
-
-const getFromLocalStorage = () => {
-  const localStorageFavs = localStorage.getItem("animeFavourites");
-  if (localStorageFavs !== null) {
-    animeFavourites = JSON.parse(localStorageFavs);
-    renderFavourites();
-  }
-};
-
-const setInLocalStorage = () => {
-  const stringifyFavs = JSON.stringify(animeFavourites);
-  localStorage.setItem("animeFavourites", stringifyFavs);
-};
 
 // 3. Código que se ejecuta cuando se carga la página: Listeners, pedir datos al servidor, leer datos de la memoria...
 
 getFromLocalStorage();
 renderFavourites();
-searchBtn.addEventListener("click", getAnime);
-searchResetBtn.addEventListener("click", clearSearch);
+searchBtn.addEventListener('click', getAnime);
+searchResetBtn.addEventListener('click', clearSearch);
