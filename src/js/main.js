@@ -23,22 +23,32 @@ function getAnime(event) {
     });
 }
 
+//pintar resultados de búsqueda
+function getAnimeCardHtml(anime) {
+  const image = renderImg(anime.image_url, anime.title); //llamamos a la función que he creado para aplicar img por defecto en series sin imagen
+  let htmlCode = '';
+  htmlCode += `<li data-animeid='${anime.mal_id}' data-animetitle='${anime.title}' data-animeimage='${anime.image_url}' `;
+  // antes de pintar, revisamos si ya está en favoritos. Como item.id es un string y mal_id es un entero, aplicamos parseInt para pasarlo a número y así poder compararlos. Si no está, lo pintamos normal
+  if (
+    animeFavourites.findIndex((item) => parseInt(item.id) === anime.mal_id) ===
+    -1
+  ) {
+    htmlCode += `class="js-anime-item anime__card">`;
+  } else {
+    htmlCode += `class="js-anime-item anime__card anime__fav--item">`;
+  }
+  htmlCode += `${image}`;
+  htmlCode += `<h3 class="anime__card--title">${anime.title}</h3>`;
+  htmlCode += `</li>`;
+  return htmlCode;
+}
+
 //función para pintar los resultados de la búsqueda (img y título del anime)
+
 function renderAnime(results) {
   for (let index = 0; index < results.length; index++) {
     const anime = results[index];
-    const image = renderImg(anime.image_url, anime.title);
-
-    // antes de pintar, revisamos si ya está en favoritos. Como item.id es un string y mal_id es un entero, aplicamos parseInt para pasarlo a número y así poder compararlos. Si no está, lo pintamos normal
-    if (
-      animeFavourites.findIndex(
-        (item) => parseInt(item.id) === anime.mal_id
-      ) === -1
-    ) {
-      animeList.innerHTML += `<li data-animeid='${anime.mal_id}' data-animetitle='${anime.title}' data-animeimage='${anime.image_url}' class="js-anime-item anime__card"> <img class="anime__card--image" ${image} <h3 class="anime__card--title">${anime.title}</h3></li>`;
-    } else {
-      animeList.innerHTML += `<li data-animeid='${anime.mal_id}' data-animetitle='${anime.title}' data-animeimage='${anime.image_url}' class="js-anime-item anime__card anime__fav--item"> <img class="anime__card--image" ${image} <h3 class="anime__card--title">${anime.title}</h3></li>`;
-    }
+    animeList.innerHTML += getAnimeCardHtml(anime);
   }
 
   //añadimos un listener para saber en qué anime hace clic para añadir a favoritos
@@ -95,10 +105,10 @@ function handleAnimeClick(event) {
 function renderFavourites() {
   favsAnimeList.innerHTML = ''; //limpiar lista
   for (const animeFav of animeFavourites) {
-    //función que devuelve string con el img y la url correcta
+    //función que devuelve string con la imagen y la url correcta
     const image = renderImg(animeFav.image, animeFav.title);
 
-    favsAnimeList.innerHTML += `<li data-animeid='${animeFav.id}' class="js-anime-item anime__card"> <img class="anime__card--image" ${image} <h3 class="anime__card--title">${animeFav.title}</h3></li>`;
+    favsAnimeList.innerHTML += `<li data-animeid='${animeFav.id}' class="js-anime-item anime__card"> ${image} <h3 class="anime__card--title">${animeFav.title}</h3></li>`;
   }
 
   setInLocalStorage();
@@ -115,7 +125,7 @@ function renderImg(imageUrl, altImage) {
     imageUrl =
       'https://via.placeholder.com/225x317.png?text=No+image+available';
   }
-  return `<img src="${imageUrl}" alt="${altImage}" title="${altImage}" />`;
+  return `<img src="${imageUrl}" alt="${altImage}" title="${altImage}" class='anime__card--image' />`;
 }
 
 //botón limpiar búsqueda
@@ -125,12 +135,9 @@ function clearSearch(event) {
   animeTitle.value = '';
 }
 
-
-
 // 3. Código que se ejecuta cuando se carga la página: Listeners, pedir datos al servidor, leer datos de la memoria...
 
 getFromLocalStorage();
 renderFavourites();
 searchBtn.addEventListener('click', getAnime);
 searchResetBtn.addEventListener('click', clearSearch);
-
