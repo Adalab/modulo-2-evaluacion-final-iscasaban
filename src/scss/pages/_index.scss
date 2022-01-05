@@ -89,3 +89,15 @@
   border: solid 1px $color-bg;
   font-family: $font-main;
 }
+.btn__fav {
+  width: 80px;
+  margin-top: 20px;
+  border: solid 1px $color-primary;
+  font-size: 1rem;
+  padding: 5px;
+  border-radius: 25px;
+  &:hover {
+    background-color: $color-primary;
+    color: $color-bg;
+  }
+}

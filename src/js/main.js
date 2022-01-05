@@ -5,6 +5,7 @@ const animeTitle = document.querySelector('.js-input');
 const searchBtn = document.querySelector('.js-btn-search');
 const animeList = document.querySelector('.js-result');
 const searchResetBtn = document.querySelector('.js-btn-reset');
+const favsResetBtn = document.querySelector('.js-btn-favreset');
 const favsAnimeList = document.querySelector('.js-favs');
 let animeFavourites = [];
 
@@ -135,9 +136,18 @@ function clearSearch(event) {
   animeTitle.value = '';
 }
 
+//botón limpiar favoritos
+function clearFavourites(event) {
+  event.preventDefault();
+  animeFavourites = []; //vacío array de favoritos
+  setInLocalStorage(); //lo guardo en local storage
+  renderFavourites(); //pinto el listado de favoritos
+}
+
 // 3. Código que se ejecuta cuando se carga la página: Listeners, pedir datos al servidor, leer datos de la memoria...
 
 getFromLocalStorage();
 renderFavourites();
 searchBtn.addEventListener('click', getAnime);
 searchResetBtn.addEventListener('click', clearSearch);
+favsResetBtn.addEventListener('click', clearFavourites);
