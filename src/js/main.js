@@ -60,18 +60,20 @@ function renderAnime(results) {
 }
 
 //Local storage
-
+//leer del LS y llamamos a la variable al cargar la página para ver si ya hay datos en favoritos
 const getFromLocalStorage = () => {
   const localStorageFavs = localStorage.getItem('animeFavourites');
   if (localStorageFavs !== null) {
-    animeFavourites = JSON.parse(localStorageFavs);
+    //si LS es diferente a null, (hay favoritos), hay que recuperarlos y pintarlos
+    animeFavourites = JSON.parse(localStorageFavs); //hay que hacer lo contrario, parsear string a objeto
     renderFavourites();
   }
 };
 
+//creamos la variable para guardar en LS y la llamamos cada vez que haya cambios en la página
 const setInLocalStorage = () => {
-  const stringifyFavs = JSON.stringify(animeFavourites);
-  localStorage.setItem('animeFavourites', stringifyFavs);
+  const stringifyFavs = JSON.stringify(animeFavourites); //como solo podemos guardar datos primitivos, usamos stringify para convertir array a string
+  localStorage.setItem('animeFavourites', stringifyFavs); //guardamos en LS con setItem y le damos nombre y guardamos el valor de la variable
 };
 
 // con esta función sabemos en qué elemento hace clic y lo añadimos a favoritos (toggle anime__fav--item) o lo eliminamos si ya estaba en el listado
