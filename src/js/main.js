@@ -7,6 +7,7 @@ const animeList = document.querySelector('.js-result');
 const searchResetBtn = document.querySelector('.js-btn-reset');
 const favsResetBtn = document.querySelector('.js-btn-favreset');
 const favsAnimeList = document.querySelector('.js-favs');
+const btnLog = document.querySelector('.js-btn-log');
 let animeFavourites = [];
 
 // 2. Funciones
@@ -28,7 +29,7 @@ function getAnime(event) {
 function getAnimeCardHtml(anime) {
   const image = renderImg(anime.image_url, anime.title); //llamamos a la función que he creado para aplicar img por defecto en series sin imagen
   let htmlCode = '';
-  htmlCode += `<li data-animeid='${anime.mal_id}' data-animetitle='${anime.title}' data-animeimage='${anime.image_url}' `;
+  htmlCode += `<li data-animeid='${anime.mal_id}' data-animetitle='${anime.title}' data-animetype='${anime.type}' data-animeimage='${anime.image_url}' `;
   // antes de pintar, revisamos si ya está en favoritos. Como item.id es un string y mal_id es un entero, aplicamos parseInt para pasarlo a número y así poder compararlos. Si no está, lo pintamos normal
   if (
     animeFavourites.findIndex((item) => parseInt(item.id) === anime.mal_id) ===
@@ -40,6 +41,7 @@ function getAnimeCardHtml(anime) {
   }
   htmlCode += `${image}`;
   htmlCode += `<h3 class="anime__card--title">${anime.title}</h3>`;
+  htmlCode += `<p class="anime__card--title">${anime.type}</p>`;
   htmlCode += `</li>`;
   return htmlCode;
 }
@@ -146,6 +148,15 @@ function clearFavourites(event) {
   renderFavourites(); //pinto el listado de favoritos
 }
 
+function log(event) {
+  event.preventDefault();
+  
+  for (const animeTitle of animeFavourites) {
+  console.log(animeTitle.title);
+  }
+  
+}
+
 // 3. Código que se ejecuta cuando se carga la página: Listeners, pedir datos al servidor, leer datos de la memoria...
 
 getFromLocalStorage();
@@ -153,3 +164,4 @@ renderFavourites();
 searchBtn.addEventListener('click', getAnime);
 searchResetBtn.addEventListener('click', clearSearch);
 favsResetBtn.addEventListener('click', clearFavourites);
+btnLog.addEventListener('click', log);
