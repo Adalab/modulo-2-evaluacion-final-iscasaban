@@ -16,7 +16,7 @@ function getAnime(event) {
   const animeSearch = animeTitle.value;
   animeList.innerHTML = '';
 
-  fetch(`https://api.jikan.moe/v3/search/anime?q=${animeSearch}`)
+  fetch(`https://api.jikan.moe/v4/anime?q=${animeSearch}`)
     .then((response) => response.json())
     .then((data) => {
       renderAnime(data.results);
@@ -125,12 +125,9 @@ function clearSearch(event) {
   animeTitle.value = '';
 }
 
-
-
 // 3. Código que se ejecuta cuando se carga la página: Listeners, pedir datos al servidor, leer datos de la memoria...
 
 getFromLocalStorage();
 renderFavourites();
 searchBtn.addEventListener('click', getAnime);
 searchResetBtn.addEventListener('click', clearSearch);
-
