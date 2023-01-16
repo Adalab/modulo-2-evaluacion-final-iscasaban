@@ -2,7 +2,6 @@
 
 The exercise consists of developing an anime series search web application, which allows us to un / check the series as favorites and save them in local storage.
 
-Link: (https://beta.adalab.es/modulo-2-evaluacion-final-iscasaban/)
 
 
 ## Milestones:
